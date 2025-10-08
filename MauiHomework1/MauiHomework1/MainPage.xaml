@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHomework1.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            
+            <Label
+                Text="Анкета пользователя"
+                Style="{StaticResource Headline}" />
+
+            <Label Text="ФИО" />
+            <Entry x:Name="NameEntry" 
+                   Placeholder="Иванов Олег Петрович"  />
+            
+            <Label Text="Номер телефона" />
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="+7" VerticalOptions="Center" />
+                <Entry x:Name="PhoneEntry" 
+                       Placeholder="9221234567  "
+                       Keyboard="Numeric" 
+                       TextChanged="PhoneEntry_OnTextChanged" MaxLength="10" />
+            </HorizontalStackLayout>
+            
+            
+            <Label Text="{Binding Source={x:Reference AgeSlider}, Path=Value, StringFormat='Возраст: ({0:F0})'}" />
+            <Slider x:Name="AgeSlider" Minimum="10" Maximum="100" Value="20" />
+            <Stepper Minimum="10" Maximum="100" Increment="1"
+                     Value="{Binding Source={x:Reference AgeSlider}, Path=Value, Mode=TwoWay}" />
+            
+            <Label Text="Пол" />
+            <RadioButton x:Name="GenderMaleRadioButton" 
+                         Content="Мужской"  
+                         Value="male" 
+                         GroupName="Gender" 
+                         IsChecked="True" />
+            <RadioButton x:Name="GenderFemaleRadioButton"
+                         Content="Женский"  
+                         Value="female" 
+                         GroupName="Gender" />
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="AgreementCheckBox" 
+                          CheckedChanged="AgreementCheckBox_OnCheckedChanged" />
+                <Label Text="Согласен с условиями обратки данных" 
+                       VerticalOptions="Center" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+            
+            <Button x:Name="SubmitBtn"
+                Text="Отправить"
+                Clicked="OnSubmitClicked"
+                HorizontalOptions="Fill" 
+                IsEnabled="False" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
